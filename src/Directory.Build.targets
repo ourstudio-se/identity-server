@@ -1,70 +1,61 @@
 <Project>
 
   <PropertyGroup>
-    <FrameworkVersion>3.1.0</FrameworkVersion>
-    <ExtensionsVersion>3.1.0</ExtensionsVersion>
-    <EntityFrameworkVersion>3.1.0</EntityFrameworkVersion>
-    
-    <IdentityServerVersion>4.1.2-*</IdentityServerVersion>
+    <FrameworkVersion>6.0.0</FrameworkVersion>
+    <ExtensionsVersion>6.0.0</ExtensionsVersion>
+    <EntityFrameworkVersion>6.0.0</EntityFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!--build related-->
-    <PackageReference Include="MinVer" Version="2.3.0" PrivateAssets="All" />
     <PackageReference Update="SimpleExec" Version="6.2.0" />
     <PackageReference Update="Bullseye" Version="3.3.0" />
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 
     <!--tests -->
-    <PackageReference Update="FluentAssertions" Version="5.10.2" />
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Update="xunit" Version="2.4.1" />
-    <PackageReference Update="xunit.runner.visualstudio" Version="2.4.1" PrivateAssets="All" />
+    <PackageReference Update="FluentAssertions" Version="6.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" />
+    <PackageReference Update="xunit" />
+    <PackageReference Update="xunit.runner.visualstudio" PrivateAssets="All" />
 
     <!--our stuff -->
-    <PackageReference Update="IdentityModel" Version="4.4.0" />
+    <PackageReference Update="IdentityModel" />
 
-    <PackageReference Update="IdentityServer4" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.AspNetIdentity" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.EntityFramework.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.EntityFramework" Version="$(IdentityServerVersion)" />
+    <PackageReference Update="IdentityServer4" />
+    <PackageReference Update="IdentityServer4.AspNetIdentity" />
+    <PackageReference Update="IdentityServer4.Storage" />
+    <PackageReference Update="IdentityServer4.EntityFramework.Storage" />
+    <PackageReference Update="IdentityServer4.EntityFramework" />
 
     <!--microsoft extensions -->
-    <PackageReference Update="Microsoft.Extensions.Caching.Memory" Version="$(ExtensionsVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Http" Version="$(ExtensionsVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(ExtensionsVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Logging" Version="$(ExtensionsVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="$(ExtensionsVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(ExtensionsVersion)" />
+    <PackageReference Update="Microsoft.Extensions.Caching.Memory" />
+    <PackageReference Update="Microsoft.Extensions.Http" />
+    <PackageReference Update="Microsoft.Extensions.Http.Polly" />
+    <PackageReference Update="Microsoft.Extensions.Logging" />
+    <PackageReference Update="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" />
     
     <!--misc -->
-    <PackageReference Update="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Update="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="5.6.0" />
-    <PackageReference Update="System.IdentityModel.Tokens.Jwt" Version="[5.6.0,6.0)" />
-    <PackageReference Update="System.Security.Principal.Windows" Version="4.7.0" />
-    <PackageReference Update="AutoMapper" Version="[10.0.0,11.0)" />
+    <PackageReference Update="Newtonsoft.Json" />
+    <PackageReference Update="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+    <PackageReference Update="System.IdentityModel.Tokens.Jwt" />
+    <PackageReference Update="System.Security.Principal.Windows" />
+    <PackageReference Update="AutoMapper" />
     
     <!--microsoft asp.net core -->
-    <PackageReference Update="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(FrameworkVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.TestHost" Version="$(FrameworkVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Identity" Version="$(FrameworkVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(FrameworkVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="$(FrameworkVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Authentication.Certificate" Version="$(FrameworkVersion)"/>
+    <PackageReference Update="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Update="Microsoft.AspNetCore.TestHost" />
+    <PackageReference Update="Microsoft.AspNetCore.Identity" />
+    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <PackageReference Update="Microsoft.AspNetCore.Authentication.Certificate"/>
     
     <!--microsoft entity framework -->
-    <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" Version="$(EntityFrameworkVersion)" />
-    <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EntityFrameworkVersion)" />
-    <PackageReference Update="Microsoft.EntityFrameworkCore.InMemory" Version="$(EntityFrameworkVersion)" />
-    <PackageReference Update="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EntityFrameworkVersion)" />
-    <PackageReference Update="Microsoft.EntityFrameworkCore.Design" Version="$(EntityFrameworkVersion)" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.InMemory" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Design" PrivateAssets="All" />
 
   </ItemGroup>
-
-  <Target Name="SetAssemblyVersion" AfterTargets="MinVer">
-    <PropertyGroup>
-      <AssemblyVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch).0</AssemblyVersion>
-    </PropertyGroup>
-  </Target>
 </Project>

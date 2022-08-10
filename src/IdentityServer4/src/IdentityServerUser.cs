@@ -50,6 +50,7 @@ namespace IdentityServer4
         /// Initializes a user identity
         /// </summary>
         /// <param name="subjectId">The subject ID</param>
+        /// <exception cref="ArgumentException"></exception>
         public IdentityServerUser(string subjectId)
         {
             if (subjectId.IsMissing()) throw new ArgumentException("SubjectId is mandatory", nameof(subjectId));
@@ -61,7 +62,7 @@ namespace IdentityServer4
         /// Creates an IdentityServer claims principal
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public ClaimsPrincipal CreatePrincipal()
         {
             if (SubjectId.IsMissing()) throw new ArgumentException("SubjectId is mandatory", nameof(SubjectId));

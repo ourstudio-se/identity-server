@@ -13,22 +13,6 @@ namespace IdentityServer4.Extensions
 {
     public static class IEnumerableExtensions
     {
-        [DebuggerStepThrough]
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> list)
-        {
-            if (list == null)
-            {
-                return true;
-            }
-
-            if (!list.Any())
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public static bool HasDuplicates<T, TProp>(this IEnumerable<T> list, Func<T, TProp> selector)
         {
             var d = new HashSet<TProp>();

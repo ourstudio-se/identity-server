@@ -13,6 +13,7 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Logging;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer4.Validation
 {
@@ -21,7 +22,7 @@ namespace IdentityServer4.Validation
         private readonly IdentityServerOptions _options;
         private readonly IResourceValidator _resourceValidator;
         private readonly ILogger<DeviceAuthorizationRequestValidator> _logger;
-        
+
         public DeviceAuthorizationRequestValidator(
             IdentityServerOptions options,
             IResourceValidator resourceValidator,
@@ -32,7 +33,8 @@ namespace IdentityServer4.Validation
             _logger = logger;
         }
 
-        public async Task<DeviceAuthorizationRequestValidationResult> ValidateAsync(NameValueCollection parameters, ClientSecretValidationResult clientValidationResult)
+        public async Task<DeviceAuthorizationRequestValidationResult> ValidateAsync(NameValueCollection parameters,
+            ClientSecretValidationResult clientValidationResult)
         {
             _logger.LogDebug("Start device authorization request validation");
 
@@ -63,7 +65,8 @@ namespace IdentityServer4.Validation
             return new DeviceAuthorizationRequestValidationResult(request);
         }
 
-        private DeviceAuthorizationRequestValidationResult Invalid(ValidatedDeviceAuthorizationRequest request, string error = OidcConstants.AuthorizeErrors.InvalidRequest, string description = null)
+        private DeviceAuthorizationRequestValidationResult Invalid(ValidatedDeviceAuthorizationRequest request,
+            string error = OidcConstants.AuthorizeErrors.InvalidRequest, string description = null)
         {
             return new DeviceAuthorizationRequestValidationResult(request, error, description);
         }
@@ -80,7 +83,8 @@ namespace IdentityServer4.Validation
             _logger.LogError(message + ": {detail}\n{requestDetails}", detail, requestDetails);
         }
 
-        private DeviceAuthorizationRequestValidationResult ValidateClient(ValidatedDeviceAuthorizationRequest request, ClientSecretValidationResult clientValidationResult)
+        private DeviceAuthorizationRequestValidationResult ValidateClient(ValidatedDeviceAuthorizationRequest request,
+            ClientSecretValidationResult clientValidationResult)
         {
             //////////////////////////////////////////////////////////
             // set client & secret
@@ -109,7 +113,8 @@ namespace IdentityServer4.Validation
             return Valid(request);
         }
 
-        private async Task<DeviceAuthorizationRequestValidationResult> ValidateScopeAsync(ValidatedDeviceAuthorizationRequest request)
+        private async Task<DeviceAuthorizationRequestValidationResult> ValidateScopeAsync(
+            ValidatedDeviceAuthorizationRequest request)
         {
             //////////////////////////////////////////////////////////
             // scope must be present
@@ -126,6 +131,7 @@ namespace IdentityServer4.Validation
                     {
                         clientAllowedScopes.Add(IdentityServerConstants.StandardScopes.OfflineAccess);
                     }
+
                     scope = clientAllowedScopes.ToSpaceSeparatedString();
                     _logger.LogTrace("Defaulting to: {scopes}", scope);
                 }
@@ -152,10 +158,12 @@ namespace IdentityServer4.Validation
             //////////////////////////////////////////////////////////
             // check if scopes are valid/supported
             //////////////////////////////////////////////////////////
-            var validatedResources = await _resourceValidator.ValidateRequestedResourcesAsync(new ResourceValidationRequest{
-                Client = request.Client, 
-                Scopes = request.RequestedScopes
-            });
+            var validatedResources = await _resourceValidator.ValidateRequestedResourcesAsync(
+                new ResourceValidationRequest
+                {
+                    Client = request.Client,
+                    Scopes = request.RequestedScopes
+                });
 
             if (!validatedResources.Succeeded)
             {
@@ -163,7 +171,7 @@ namespace IdentityServer4.Validation
                 {
                     return Invalid(request, OidcConstants.AuthorizeErrors.InvalidScope);
                 }
-                
+
                 return Invalid(request, OidcConstants.AuthorizeErrors.UnauthorizedClient, "Invalid scope");
             }
 
@@ -174,7 +182,7 @@ namespace IdentityServer4.Validation
             }
 
             request.ValidatedResources = validatedResources;
-            
+
             return Valid(request);
         }
     }

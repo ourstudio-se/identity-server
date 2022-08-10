@@ -2,13 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityModel;
-using IdentityServer4.Extensions;
-using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System;
+using IdentityModel;
+using IdentityServer4.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer4.Validation
 {
@@ -48,11 +48,16 @@ namespace IdentityServer4.Validation
         {
             IsError = false;
 
-            if (principal.Identities.Count() != 1) throw new InvalidOperationException("only a single identity supported");
-            if (principal.FindFirst(JwtClaimTypes.Subject) == null) throw new InvalidOperationException("sub claim is missing");
-            if (principal.FindFirst(JwtClaimTypes.IdentityProvider) == null) throw new InvalidOperationException("idp claim is missing");
-            if (principal.FindFirst(JwtClaimTypes.AuthenticationMethod) == null) throw new InvalidOperationException("amr claim is missing");
-            if (principal.FindFirst(JwtClaimTypes.AuthenticationTime) == null) throw new InvalidOperationException("auth_time claim is missing");
+            if (principal.Identities.Count() != 1)
+                throw new InvalidOperationException("only a single identity supported");
+            if (principal.FindFirst(JwtClaimTypes.Subject) == null)
+                throw new InvalidOperationException("sub claim is missing");
+            if (principal.FindFirst(JwtClaimTypes.IdentityProvider) == null)
+                throw new InvalidOperationException("idp claim is missing");
+            if (principal.FindFirst(JwtClaimTypes.AuthenticationMethod) == null)
+                throw new InvalidOperationException("amr claim is missing");
+            if (principal.FindFirst(JwtClaimTypes.AuthenticationTime) == null)
+                throw new InvalidOperationException("auth_time claim is missing");
 
             Subject = principal;
             CustomResponse = customResponse;
@@ -64,7 +69,8 @@ namespace IdentityServer4.Validation
         /// <param name="error">The error.</param>
         /// <param name="errorDescription">The error description.</param>
         /// <param name="customResponse">Custom response elements</param>
-        public GrantValidationResult(TokenRequestErrors error, string errorDescription = null, Dictionary<string, object> customResponse = null)
+        public GrantValidationResult(TokenRequestErrors error, string errorDescription = null,
+            Dictionary<string, object> customResponse = null)
         {
             Error = ConvertTokenErrorEnumToString(error);
             ErrorDescription = errorDescription;
@@ -115,7 +121,8 @@ namespace IdentityServer4.Validation
                 new Claim(JwtClaimTypes.Subject, subject),
                 new Claim(JwtClaimTypes.AuthenticationMethod, authenticationMethod),
                 new Claim(JwtClaimTypes.IdentityProvider, identityProvider),
-                new Claim(JwtClaimTypes.AuthenticationTime, new DateTimeOffset(authTime).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtClaimTypes.AuthenticationTime, new DateTimeOffset(authTime).ToUnixTimeSeconds().ToString(),
+                    ClaimValueTypes.Integer64)
             };
 
             if (!claims.IsNullOrEmpty())

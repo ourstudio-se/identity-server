@@ -22,7 +22,10 @@ namespace IdentityServer.UnitTests.Services.Default
 
         private IdentityServerOptions _options = new IdentityServerOptions();
         private MockHttpContextAccessor _mockMockHttpContextAccessor;
-        private MockMessageStore<LogoutNotificationContext> _mockEndSessionStore = new MockMessageStore<LogoutNotificationContext>();
+
+        private MockMessageStore<LogoutNotificationContext> _mockEndSessionStore =
+            new MockMessageStore<LogoutNotificationContext>();
+
         private MockMessageStore<LogoutMessage> _mockLogoutMessageStore = new MockMessageStore<LogoutMessage>();
         private MockMessageStore<ErrorMessage> _mockErrorMessageStore = new MockMessageStore<ErrorMessage>();
         private MockConsentMessageStore _mockConsentStore = new MockConsentMessageStore();
@@ -34,9 +37,10 @@ namespace IdentityServer.UnitTests.Services.Default
 
         public DefaultIdentityServerInteractionServiceTests()
         {
-            _mockMockHttpContextAccessor = new MockHttpContextAccessor(_options, _mockUserSession, _mockEndSessionStore);
+            _mockMockHttpContextAccessor =
+                new MockHttpContextAccessor(_options, _mockUserSession, _mockEndSessionStore);
 
-            _subject = new DefaultIdentityServerInteractionService(new StubClock(), 
+            _subject = new DefaultIdentityServerInteractionService(new StubClock(),
                 _mockMockHttpContextAccessor,
                 _mockLogoutMessageStore,
                 _mockErrorMessageStore,
@@ -51,13 +55,14 @@ namespace IdentityServer.UnitTests.Services.Default
             _resourceValidationResult.Resources.IdentityResources.Add(new IdentityResources.OpenId());
             _resourceValidationResult.ParsedScopes.Add(new ParsedScopeValue("openid"));
         }
-        
+
         [Fact]
         public async Task GetLogoutContextAsync_valid_session_and_logout_id_should_not_provide_signout_iframe()
         {
             // for this, we're just confirming that since the session has changed, there's not use in doing the iframe and thsu SLO
             _mockUserSession.SessionId = null;
-            _mockLogoutMessageStore.Messages.Add("id", new Message<LogoutMessage>(new LogoutMessage() { SessionId = "session" }));
+            _mockLogoutMessageStore.Messages.Add("id",
+                new Message<LogoutMessage>(new LogoutMessage() { SessionId = "session" }));
 
             var context = await _subject.GetLogoutContextAsync("id");
 
@@ -113,11 +118,11 @@ namespace IdentityServer.UnitTests.Services.Default
         public void GrantConsentAsync_should_throw_if_granted_and_no_subject()
         {
             Func<Task> act = () => _subject.GrantConsentAsync(
-                new AuthorizationRequest(), 
-                new ConsentResponse() { ScopesValuesConsented = new[] { "openid" } }, 
+                new AuthorizationRequest(),
+                new ConsentResponse() { ScopesValuesConsented = new[] { "openid" } },
                 null);
 
-            act.Should().Throw<ArgumentNullException>()
+            act.Should().ThrowAsync<ArgumentNullException>().Result
                 .And.Message.Should().Contain("subject");
         }
 
@@ -129,7 +134,8 @@ namespace IdentityServer.UnitTests.Services.Default
                 Client = new Client { ClientId = "client" },
                 ValidatedResources = _resourceValidationResult
             };
-            await _subject.GrantConsentAsync(req, new ConsentResponse { Error = AuthorizationError.AccessDenied }, null);
+            await _subject.GrantConsentAsync(req, new ConsentResponse { Error = AuthorizationError.AccessDenied },
+                null);
         }
 
         [Fact]
@@ -137,7 +143,8 @@ namespace IdentityServer.UnitTests.Services.Default
         {
             _mockUserSession.User = new IdentityServerUser("bob").CreatePrincipal();
 
-            var req = new AuthorizationRequest() { 
+            var req = new AuthorizationRequest()
+            {
                 Client = new Client { ClientId = "client" },
                 ValidatedResources = _resourceValidationResult
             };

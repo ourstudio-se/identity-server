@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityModel;
 using IdentityServer.UnitTests.Validation.Setup;
 using Xunit;
 
@@ -41,7 +42,13 @@ namespace IdentityServer.UnitTests.Services.Default
         public async Task CreateRefreshToken_token_exists_in_store()
         {
             var client = new Client();
-            var accessToken = new Token();
+            var accessToken = new Token
+            {
+                Claims = new List<Claim>
+                {
+                    new Claim(JwtClaimTypes.Subject, "123"),
+                },
+            };
 
             var handle = await _subject.CreateRefreshTokenAsync(_user, accessToken, client);
 
@@ -59,7 +66,13 @@ namespace IdentityServer.UnitTests.Services.Default
                 AbsoluteRefreshTokenLifetime = 10
             };
 
-            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token(), client);
+            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token
+            {
+                Claims = new List<Claim>
+                {
+                    new Claim(JwtClaimTypes.Subject, "123"),
+                },
+            }, client);
 
             var refreshToken = (await _store.GetRefreshTokenAsync(handle));
 
@@ -79,7 +92,13 @@ namespace IdentityServer.UnitTests.Services.Default
                 AbsoluteRefreshTokenLifetime = 10
             };
 
-            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token(), client);
+            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token
+            {
+                Claims = new List<Claim>
+                {
+                    new Claim(JwtClaimTypes.Subject, "123"),
+                },
+            }, client);
 
             var refreshToken = (await _store.GetRefreshTokenAsync(handle));
 
@@ -98,7 +117,13 @@ namespace IdentityServer.UnitTests.Services.Default
                 SlidingRefreshTokenLifetime = 10
             };
 
-            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token(), client);
+            var handle = await _subject.CreateRefreshTokenAsync(_user, new Token
+            {
+                Claims = new List<Claim>
+                {
+                    new Claim(JwtClaimTypes.Subject, "123"),
+                },
+            }, client);
 
             var refreshToken = (await _store.GetRefreshTokenAsync(handle));
 

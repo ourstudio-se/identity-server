@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
@@ -67,7 +68,6 @@ namespace IdentityServer.IntegrationTests.Clients
             {
                 Address = TokenEndpoint,
 
-                ClientId = ClientId,
                 ClientAssertion =
                 {
                     Type = OidcConstants.ClientAssertionTypes.JwtBearer,
@@ -88,7 +88,6 @@ namespace IdentityServer.IntegrationTests.Clients
             var response = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = TokenEndpoint,
-                ClientId = "client",
 
                 ClientAssertion =
                 {
@@ -111,7 +110,6 @@ namespace IdentityServer.IntegrationTests.Clients
             {
                 Address = TokenEndpoint,
 
-                ClientId = ClientId,
                 ClientAssertion =
                 {
                     Type = OidcConstants.ClientAssertionTypes.JwtBearer,
@@ -128,7 +126,6 @@ namespace IdentityServer.IntegrationTests.Clients
             {
                 Address = TokenEndpoint,
 
-                ClientId = ClientId,
                 ClientAssertion =
                 {
                     Type = OidcConstants.ClientAssertionTypes.JwtBearer,
@@ -149,7 +146,6 @@ namespace IdentityServer.IntegrationTests.Clients
             {
                 Address = TokenEndpoint,
 
-                ClientId = ClientId,
                 ClientAssertion =
                 {
                     Type = OidcConstants.ClientAssertionTypes.JwtBearer,
@@ -174,7 +170,6 @@ namespace IdentityServer.IntegrationTests.Clients
             {
                 Address = TokenEndpoint,
 
-                ClientId = clientId,
                 ClientAssertion =
                 {
                     Type = OidcConstants.ClientAssertionTypes.JwtBearer,

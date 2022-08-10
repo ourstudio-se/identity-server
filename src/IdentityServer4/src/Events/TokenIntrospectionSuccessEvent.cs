@@ -2,10 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4.Extensions;
-using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using IdentityServer4.Extensions;
+using IdentityServer4.Validation;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer4.Events
 {
@@ -21,9 +22,9 @@ namespace IdentityServer4.Events
         /// <param name="result">The result.</param>
         public TokenIntrospectionSuccessEvent(IntrospectionRequestValidationResult result)
             : base(EventCategories.Token,
-                  "Token Introspection Success",
-                  EventTypes.Success,
-                  EventIds.TokenIntrospectionSuccess)
+                "Token Introspection Success",
+                EventTypes.Success,
+                EventIds.TokenIntrospectionSuccess)
         {
             ApiName = result.Api.Name;
             IsActive = result.IsActive;
@@ -32,7 +33,7 @@ namespace IdentityServer4.Events
             {
                 Token = Obfuscate(result.Token);
             }
-            
+
             if (!result.Claims.IsNullOrEmpty())
             {
                 ClaimTypes = result.Claims.Select(c => c.Type).Distinct();

@@ -190,7 +190,7 @@ Sha256.ROTR = function(n, x) {
 };
 
 /**
- * Logical functions [§4.1.2].
+ * Logical functions [§6.0.0].
  * @private
  */
 Sha256.Σ0  = function(x) { return Sha256.ROTR(2,  x) ^ Sha256.ROTR(13, x) ^ Sha256.ROTR(22, x); };

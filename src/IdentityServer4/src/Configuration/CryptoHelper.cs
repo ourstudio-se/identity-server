@@ -21,7 +21,7 @@ namespace IdentityServer4.Configuration
         {
             return new RsaSecurityKey(RSA.Create(keySize))
             {
-                KeyId = CryptoRandom.CreateUniqueId(16, CryptoRandom.OutputFormat.Hex)
+                KeyId = CryptoRandom.CreateUniqueId(16)
             };
         }
 
@@ -35,7 +35,7 @@ namespace IdentityServer4.Configuration
         {
             return new ECDsaSecurityKey(ECDsa.Create(GetCurveFromCrvValue(curve)))
             {
-                KeyId = CryptoRandom.CreateUniqueId(16, CryptoRandom.OutputFormat.Hex)
+                KeyId = CryptoRandom.CreateUniqueId(16)
             };
         }
 
@@ -137,8 +137,7 @@ namespace IdentityServer4.Configuration
         internal static bool IsValidCrvValueForAlgorithm(string crv)
         {
             return crv == JsonWebKeyECTypes.P256 ||
-                   crv == JsonWebKeyECTypes.P384 ||
-                   crv == JsonWebKeyECTypes.P521;
+                   crv == JsonWebKeyECTypes.P384;
         }
 
         internal static string GetRsaSigningAlgorithmValue(IdentityServerConstants.RsaSigningAlgorithm value)

@@ -2,16 +2,16 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using IdentityServer4;
 using IdentityServer4.Configuration;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using System;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using JsonWebKey = Microsoft.IdentityModel.Tokens.JsonWebKey;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -27,27 +27,31 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The builder.</param>
         /// <param name="credential">The credential.</param>
         /// <returns></returns>
-        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, SigningCredentials credential)
+        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder,
+            SigningCredentials credential)
         {
             if (!(credential.Key is AsymmetricSecurityKey
-                || credential.Key is IdentityModel.Tokens.JsonWebKey && ((IdentityModel.Tokens.JsonWebKey)credential.Key).HasPrivateKey))
+                  || credential.Key is JsonWebKey && ((JsonWebKey) credential.Key).HasPrivateKey))
             {
                 throw new InvalidOperationException("Signing key is not asymmetric");
             }
 
-            if (!IdentityServerConstants.SupportedSigningAlgorithms.Contains(credential.Algorithm, StringComparer.Ordinal))
+            if (!IdentityServerConstants.SupportedSigningAlgorithms.Contains(credential.Algorithm,
+                    StringComparer.Ordinal))
             {
                 throw new InvalidOperationException($"Signing algorithm {credential.Algorithm} is not supported.");
             }
 
-            if (credential.Key is ECDsaSecurityKey key && !CryptoHelper.IsValidCurveForAlgorithm(key, credential.Algorithm))
+            if (credential.Key is ECDsaSecurityKey key &&
+                !CryptoHelper.IsValidCurveForAlgorithm(key, credential.Algorithm))
             {
                 throw new InvalidOperationException("Invalid curve for signing algorithm");
             }
 
-            if (credential.Key is IdentityModel.Tokens.JsonWebKey jsonWebKey)
+            if (credential.Key is JsonWebKey jsonWebKey)
             {
-                if (jsonWebKey.Kty == JsonWebAlgorithmsKeyTypes.EllipticCurve && !CryptoHelper.IsValidCrvValueForAlgorithm(jsonWebKey.Crv))
+                if (jsonWebKey.Kty == JsonWebAlgorithmsKeyTypes.EllipticCurve &&
+                    !CryptoHelper.IsValidCrvValueForAlgorithm(jsonWebKey.Crv))
                     throw new InvalidOperationException("Invalid crv value for signing algorithm");
             }
 
@@ -73,7 +77,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException">X509 certificate does not have a private key.</exception>
-        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, X509Certificate2 certificate, string signingAlgorithm = SecurityAlgorithms.RsaSha256)
+        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder,
+            X509Certificate2 certificate, string signingAlgorithm = SecurityAlgorithms.RsaSha256)
         {
             if (certificate == null) throw new ArgumentNullException(nameof(certificate));
 
@@ -107,7 +112,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string signingAlgorithm = SecurityAlgorithms.RsaSha256)
         {
             var certificate = CryptoHelper.FindCertificate(name, location, nameType);
-            if (certificate == null) throw new InvalidOperationException($"certificate: '{name}' not found in certificate store");
+            if (certificate == null)
+                throw new InvalidOperationException($"certificate: '{name}' not found in certificate store");
 
             return builder.AddSigningCredential(certificate, signingAlgorithm);
         }
@@ -119,7 +125,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="key">The key.</param>
         /// <param name="signingAlgorithm">The signing algorithm</param>
         /// <returns></returns>
-        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, SecurityKey key, string signingAlgorithm)
+        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, SecurityKey key,
+            string signingAlgorithm)
         {
             var credential = new SigningCredentials(key, signingAlgorithm);
             return builder.AddSigningCredential(credential);
@@ -132,7 +139,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="key">The RSA key.</param>
         /// <param name="signingAlgorithm">The signing algorithm</param>
         /// <returns></returns>
-        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, RsaSecurityKey key, IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm)
+        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder,
+            RsaSecurityKey key, IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm)
         {
             var credential = new SigningCredentials(key, CryptoHelper.GetRsaSigningAlgorithmValue(signingAlgorithm));
             return builder.AddSigningCredential(credential);
@@ -145,7 +153,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="key">The ECDsa key.</param>
         /// <param name="signingAlgorithm">The signing algorithm</param>
         /// <returns></returns>
-        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder, ECDsaSecurityKey key, IdentityServerConstants.ECDsaSigningAlgorithm signingAlgorithm)
+        public static IIdentityServerBuilder AddSigningCredential(this IIdentityServerBuilder builder,
+            ECDsaSecurityKey key, IdentityServerConstants.ECDsaSigningAlgorithm signingAlgorithm)
         {
             var credential = new SigningCredentials(key, CryptoHelper.GetECDsaSigningAlgorithmValue(signingAlgorithm));
             return builder.AddSigningCredential(credential);
@@ -163,7 +172,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IIdentityServerBuilder builder,
             bool persistKey = true,
             string filename = null,
-            IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm = IdentityServerConstants.RsaSigningAlgorithm.RS256)
+            IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm =
+                IdentityServerConstants.RsaSigningAlgorithm.RS256)
         {
             if (filename == null)
             {
@@ -185,7 +195,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 if (persistKey)
                 {
-                    File.WriteAllText(filename, JsonConvert.SerializeObject(jwk));
+                    File.WriteAllText(filename, JsonSerializer.Serialize(jwk));
                 }
 
                 return builder.AddSigningCredential(key, signingAlgorithm);
@@ -198,7 +208,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The builder.</param>
         /// <param name="keys">The keys.</param>
         /// <returns></returns>
-        public static IIdentityServerBuilder AddValidationKey(this IIdentityServerBuilder builder, params SecurityKeyInfo[] keys)
+        public static IIdentityServerBuilder AddValidationKey(this IIdentityServerBuilder builder,
+            params SecurityKeyInfo[] keys)
         {
             builder.Services.AddSingleton<IValidationKeysStore>(new InMemoryValidationKeysStore(keys));
 
@@ -215,7 +226,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddValidationKey(
             this IIdentityServerBuilder builder,
             RsaSecurityKey key,
-            IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm = IdentityServerConstants.RsaSigningAlgorithm.RS256)
+            IdentityServerConstants.RsaSigningAlgorithm signingAlgorithm =
+                IdentityServerConstants.RsaSigningAlgorithm.RS256)
         {
             var keyInfo = new SecurityKeyInfo
             {
@@ -236,7 +248,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddValidationKey(
             this IIdentityServerBuilder builder,
             ECDsaSecurityKey key,
-            IdentityServerConstants.ECDsaSigningAlgorithm signingAlgorithm = IdentityServerConstants.ECDsaSigningAlgorithm.ES256)
+            IdentityServerConstants.ECDsaSigningAlgorithm signingAlgorithm =
+                IdentityServerConstants.ECDsaSigningAlgorithm.ES256)
         {
             var keyInfo = new SecurityKeyInfo
             {
@@ -265,7 +278,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // add signing algorithm name to key ID to allow using the same key for two different algorithms (e.g. RS256 and PS56);
             var key = new X509SecurityKey(certificate);
             key.KeyId += signingAlgorithm;
-            
+
             var keyInfo = new SecurityKeyInfo
             {
                 Key = key,
@@ -291,7 +304,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string signingAlgorithm = SecurityAlgorithms.RsaSha256)
         {
             var certificate = CryptoHelper.FindCertificate(name, location, nameType);
-            if (certificate == null) throw new InvalidOperationException($"certificate: '{name}' not found in certificate store");
+            if (certificate == null)
+                throw new InvalidOperationException($"certificate: '{name}' not found in certificate store");
 
             return builder.AddValidationKey(certificate, signingAlgorithm);
         }

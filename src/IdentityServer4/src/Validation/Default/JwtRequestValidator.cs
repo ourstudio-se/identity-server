@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Configuration;
@@ -26,14 +28,11 @@ namespace IdentityServer4.Validation
     {
         private readonly string _audienceUri;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
         /// <summary>
         /// JWT handler
         /// </summary>
-        protected JwtSecurityTokenHandler Handler = new JwtSecurityTokenHandler
-        {
-            MapInboundClaims = false
-        };
+        protected JwtSecurityTokenHandler Handler = new JwtSecurityTokenHandler();
 
         /// <summary>
         /// The audience URI to use
@@ -55,7 +54,7 @@ namespace IdentityServer4.Validation
         /// The logger
         /// </summary>
         protected readonly ILogger Logger;
-        
+
         /// <summary>
         /// The optione
         /// </summary>
@@ -64,10 +63,11 @@ namespace IdentityServer4.Validation
         /// <summary>
         /// Instantiates an instance of private_key_jwt secret validator
         /// </summary>
-        public JwtRequestValidator(IHttpContextAccessor contextAccessor, IdentityServerOptions options, ILogger<JwtRequestValidator> logger)
+        public JwtRequestValidator(IHttpContextAccessor contextAccessor, IdentityServerOptions options,
+            ILogger<JwtRequestValidator> logger)
         {
             _httpContextAccessor = contextAccessor;
-            
+
             Options = options;
             Logger = logger;
         }
@@ -158,7 +158,8 @@ namespace IdentityServer4.Validation
         /// <param name="keys">The keys</param>
         /// <param name="client">The client</param>
         /// <returns></returns>
-        protected virtual Task<JwtSecurityToken> ValidateJwtAsync(string jwtTokenString, IEnumerable<SecurityKey> keys, Client client)
+        protected virtual Task<JwtSecurityToken> ValidateJwtAsync(string jwtTokenString, IEnumerable<SecurityKey> keys,
+            Client client)
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -181,8 +182,8 @@ namespace IdentityServer4.Validation
             }
 
             Handler.ValidateToken(jwtTokenString, tokenValidationParameters, out var token);
-            
-            return Task.FromResult((JwtSecurityToken)token);
+
+            return Task.FromResult((JwtSecurityToken) token);
         }
 
         /// <summary>
@@ -198,20 +199,7 @@ namespace IdentityServer4.Validation
             {
                 if (!Constants.Filters.JwtRequestClaimTypesFilter.Contains(key))
                 {
-                    var value = token.Payload[key];
-
-                    switch (value)
-                    {
-                        case string s:
-                            payload.Add(key, s);
-                            break;
-                        case JObject jobj:
-                            payload.Add(key, jobj.ToString(Formatting.None));
-                            break;
-                        case JArray jarr:
-                            payload.Add(key, jarr.ToString(Formatting.None));
-                            break;
-                    }
+                    payload.Add(key, token.Payload[key].ToString());
                 }
             }
 
