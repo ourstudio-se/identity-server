@@ -26,6 +26,7 @@
     <PackageReference Update="Ourstudio.IdentityServer.Storage" />
     <PackageReference Update="Ourstudio.IdentityServer.EntityFramework.Storage" />
     <PackageReference Update="Ourstudio.IdentityServer.EntityFramework" />
+    <PackageReference Update="Ourstudio.IdentityServer.RedisStore" />
 
     <!--microsoft extensions -->
     <PackageReference Update="Microsoft.Extensions.Caching.Memory" />
