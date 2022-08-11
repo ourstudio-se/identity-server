@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using IdentityServerHost.Data;
+using Ourstudio.IdentityServerHost.Data;
 using Microsoft.AspNetCore.Identity;
-using IdentityServer4.Models;
+using Ourstudio.IdentityServer.Models;
 
 namespace SqlServer
 {

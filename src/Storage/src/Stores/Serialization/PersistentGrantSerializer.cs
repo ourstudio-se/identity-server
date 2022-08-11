@@ -3,12 +3,12 @@
 
 using System.Text.Json;
 
-namespace IdentityServer4.Stores.Serialization
+namespace Ourstudio.IdentityServer.Stores.Serialization
 {
     /// <summary>
     /// JSON-based persisted grant serializer
     /// </summary>
-    /// <seealso cref="IdentityServer4.Stores.Serialization.IPersistentGrantSerializer" />
+    /// <seealso cref="IPersistentGrantSerializer" />
     public class PersistentGrantSerializer : IPersistentGrantSerializer
     {
         private static readonly JsonSerializerOptions _settings;

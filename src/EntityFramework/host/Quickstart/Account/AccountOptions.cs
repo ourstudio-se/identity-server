@@ -4,7 +4,7 @@
 
 using System;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Ourstudio.IdentityServerHost.Quickstart.UI
 {
     public class AccountOptions
     {

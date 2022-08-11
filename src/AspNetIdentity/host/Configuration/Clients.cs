@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4.Models;
+using Ourstudio.IdentityServer.Models;
 using System.Collections.Generic;
 
-namespace IdentityServerHost.Configuration
+namespace Ourstudio.IdentityServerHost.Configuration
 {
     public static class Clients
     {

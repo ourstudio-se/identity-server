@@ -21,11 +21,11 @@
     <!--our stuff -->
     <PackageReference Update="IdentityModel" />
 
-    <PackageReference Update="IdentityServer4" />
-    <PackageReference Update="IdentityServer4.AspNetIdentity" />
-    <PackageReference Update="IdentityServer4.Storage" />
-    <PackageReference Update="IdentityServer4.EntityFramework.Storage" />
-    <PackageReference Update="IdentityServer4.EntityFramework" />
+    <PackageReference Update="Ourstudio.IdentityServer" />
+    <PackageReference Update="Ourstudio.IdentityServer.AspNetIdentity" />
+    <PackageReference Update="Ourstudio.IdentityServer.Storage" />
+    <PackageReference Update="Ourstudio.IdentityServer.EntityFramework.Storage" />
+    <PackageReference Update="Ourstudio.IdentityServer.EntityFramework" />
 
     <!--microsoft extensions -->
     <PackageReference Update="Microsoft.Extensions.Caching.Memory" />

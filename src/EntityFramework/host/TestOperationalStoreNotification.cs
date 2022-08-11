@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IdentityServer4.EntityFramework;
-using IdentityServer4.EntityFramework.Entities;
+using Ourstudio.IdentityServer.EntityFramework;
+using Ourstudio.IdentityServer.EntityFramework.Entities;
 
-namespace IdentityServerHost
+namespace Ourstudio.IdentityServerHost
 {
     public class TestOperationalStoreNotification : IOperationalStoreNotification
     {

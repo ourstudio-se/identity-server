@@ -1,3 +1,3 @@
-git clean -xdf -e samples -e src/IdentityServer4/.vs
+git clean -xdf -e samples -e src/IdentityServer/.vs
 
 ./clean_cache.ps1

@@ -5,21 +5,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer4.EntityFramework.Interfaces;
-using IdentityServer4.EntityFramework.Mappers;
-using IdentityServer4.Models;
-using IdentityServer4.Stores;
+using Ourstudio.IdentityServer.EntityFramework.Interfaces;
+using Ourstudio.IdentityServer.EntityFramework.Mappers;
+using Ourstudio.IdentityServer.Models;
+using Ourstudio.IdentityServer.Stores;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System;
-using IdentityServer4.Extensions;
+using Ourstudio.IdentityServer.Extensions;
 
-namespace IdentityServer4.EntityFramework.Stores
+namespace Ourstudio.IdentityServer.EntityFramework.Stores
 {
     /// <summary>
     /// Implementation of IPersistedGrantStore thats uses EF.
     /// </summary>
-    /// <seealso cref="IdentityServer4.Stores.IPersistedGrantStore" />
+    /// <seealso cref="Ourstudio.IdentityServer.Stores.IPersistedGrantStore" />
     public class PersistedGrantStore : IPersistedGrantStore
     {
         /// <summary>

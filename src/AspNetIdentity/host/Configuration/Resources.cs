@@ -3,11 +3,11 @@
 
 
 using IdentityModel;
-using IdentityServer4.Models;
+using Ourstudio.IdentityServer.Models;
 using System.Collections.Generic;
-using static IdentityServer4.IdentityServerConstants;
+using static Ourstudio.IdentityServer.IdentityServerConstants;
 
-namespace IdentityServerHost.Configuration
+namespace Ourstudio.IdentityServerHost.Configuration
 {
     public class Resources
     {
