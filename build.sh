@@ -25,3 +25,7 @@ popd
 pushd ./src/AspNetIdentity
 ./build.sh "$@"
 popd
+
+pushd ./src/RedisStore
+./build.sh "$@"
+popd
