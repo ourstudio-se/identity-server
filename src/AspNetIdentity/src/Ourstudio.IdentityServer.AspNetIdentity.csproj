@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Ourstudio.IdentityServer.AspNetIdentity</PackageId>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    
+    <Description>ASP.NET Core Identity Integration for IdentityServer</Description>
+    <Authors>Brock Allen;Dominick Baier</Authors>
+    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;ASP.NET Identity</PackageTags>
+    <PackageIcon>icon.jpg</PackageIcon>
+    <PackageProjectUrl>https://github.com/ourstudio-se/identity-server</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReleaseNotes>https://github.com/ourstudio-se/identity-server/releases</PackageReleaseNotes>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <RootNamespace>Ourstudio.IdentityServer.AspNetIdentity</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Ourstudio.IdentityServer" />
+    
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

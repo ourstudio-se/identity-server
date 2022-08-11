@@ -5,9 +5,9 @@
 using System;
 using System.Linq;
 using IdentityModel;
-using IdentityServer4;
-using IdentityServer4.AspNetIdentity;
-using IdentityServer4.Configuration;
+using Ourstudio.IdentityServer;
+using Ourstudio.IdentityServer.AspNetIdentity;
+using Ourstudio.IdentityServer.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 
@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.ConfigureExternalCookie(options =>
             {
                 options.Cookie.IsEssential = true;
-                // https://github.com/IdentityServer/IdentityServer4/issues/2595
+                // https://github.com/IdentityServer/Ourstudio.IdentityServer/issues/2595
                 options.Cookie.SameSite = AspNetCore.Http.SameSiteMode.None;
             });
 

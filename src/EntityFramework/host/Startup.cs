@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using IdentityServerHost.Quickstart.UI;
+using Ourstudio.IdentityServerHost.Quickstart.UI;
 
-namespace IdentityServerHost
+namespace Ourstudio.IdentityServerHost
 {
     public class Startup
     {

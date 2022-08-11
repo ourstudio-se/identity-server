@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Options;
-using IdentityServer4.EntityFramework.Stores;
-using IdentityServer4.Models;
-using IdentityServer4.Stores.Serialization;
+using Ourstudio.IdentityServer.EntityFramework.DbContexts;
+using Ourstudio.IdentityServer.EntityFramework.Options;
+using Ourstudio.IdentityServer.EntityFramework.Stores;
+using Ourstudio.IdentityServer.Models;
+using Ourstudio.IdentityServer.Stores.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,11 +11,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
-using IdentityServer4.EntityFramework.Entities;
+using Ourstudio.IdentityServer.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
 using Xunit;
 
-namespace IdentityServer4.EntityFramework.IntegrationTests.Stores
+namespace Ourstudio.IdentityServer.EntityFramework.IntegrationTests.Stores
 {
     public class DeviceFlowStoreTests : IntegrationTest<DeviceFlowStoreTests, PersistedGrantDbContext, OperationalStoreOptions>
     {

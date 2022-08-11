@@ -3,10 +3,10 @@
 
 
 using System;
-using IdentityServer4.EntityFramework.Entities;
+using Ourstudio.IdentityServer.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace IdentityServer4.EntityFramework.Interfaces
+namespace Ourstudio.IdentityServer.EntityFramework.Interfaces
 {
     /// <summary>
     /// Abstraction for the configuration context.

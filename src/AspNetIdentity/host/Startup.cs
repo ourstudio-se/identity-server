@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using IdentityServerHost.Data;
-using IdentityServerHost.Configuration;
-using IdentityServer4.Models;
+using Ourstudio.IdentityServer.Models;
 using Microsoft.Extensions.Hosting;
-using IdentityServer4;
+using Ourstudio.IdentityServer;
+using Ourstudio.IdentityServerHost.Configuration;
+using Ourstudio.IdentityServerHost.Data;
 
-namespace IdentityServerHost
+namespace Ourstudio.IdentityServerHost
 {
     public class Startup
     {

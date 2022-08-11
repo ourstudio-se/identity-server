@@ -3,9 +3,9 @@
 
 
 using System.Threading.Tasks;
-using IdentityServer4.Models;
+using Ourstudio.IdentityServer.Models;
 
-namespace IdentityServer4.Stores
+namespace Ourstudio.IdentityServer.Stores
 {
     /// <summary>
     /// Interface for the device flow store

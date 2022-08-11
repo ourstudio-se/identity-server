@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     
-    <ProjectReference Include="..\src\IdentityServer4.AspNetIdentity.csproj" />
+    <ProjectReference Include="..\src\Ourstudio.IdentityServer.AspNetIdentity.csproj" />
   </ItemGroup>
 
 </Project>

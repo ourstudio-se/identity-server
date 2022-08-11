@@ -1,4 +1,4 @@
-﻿using IdentityServerHost;
+﻿using Ourstudio.IdentityServerHost;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 

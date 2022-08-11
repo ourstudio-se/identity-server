@@ -4,5 +4,5 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("IdentityServer4.EntityFramework.UnitTests")]
-[assembly: InternalsVisibleTo("IdentityServer4.EntityFramework.IntegrationTests")]
+[assembly: InternalsVisibleTo("Ourstudio.IdentityServer.EntityFramework.UnitTests")]
+[assembly: InternalsVisibleTo("Ourstudio.IdentityServer.EntityFramework.IntegrationTests")]

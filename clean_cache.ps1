@@ -1,9 +1,9 @@
-Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4\ -Recurse -ErrorAction SilentlyContinue 
-Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.storage\ -Recurse -ErrorAction SilentlyContinue 
-Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.entityframework\ -Recurse -ErrorAction SilentlyContinue 
-Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.entityframework.storage\ -Recurse -ErrorAction SilentlyContinue 
-Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.aspnetidentity\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\identityserver\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\identityserver.storage\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\identityserver.entityframework\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\identityserver.entityframework.storage\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\identityserver.aspnetidentity\ -Recurse -ErrorAction SilentlyContinue 
 
 Remove-Item $env:USERPROFILE\.nuget\packages\identitymodel\ -Recurse -ErrorAction SilentlyContinue 
 Remove-Item $env:USERPROFILE\.nuget\packages\IdentityModel.AspNetCore.OAuth2Introspection\ -Recurse -ErrorAction SilentlyContinue 
-Remove-Item $env:USERPROFILE\.nuget\packages\IdentityServer4.AccessTokenValidation\ -Recurse -ErrorAction SilentlyContinue 
+Remove-Item $env:USERPROFILE\.nuget\packages\IdentityServer.AccessTokenValidation\ -Recurse -ErrorAction SilentlyContinue 

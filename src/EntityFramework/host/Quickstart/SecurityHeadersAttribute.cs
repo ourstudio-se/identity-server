@@ -5,7 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Ourstudio.IdentityServerHost.Quickstart.UI
 {
     public class SecurityHeadersAttribute : ActionFilterAttribute
     {
