@@ -318,7 +318,7 @@ namespace IdentityServer.IntegrationTests.Common
             string responseMode = null,
             string codeChallenge = null,
             string codeChallengeMethod = null,
-            object extra = null)
+            Parameters extra = null)
         {
             var url = new RequestUrl(AuthorizeEndpoint).CreateAuthorizeUrl(
                 clientId: clientId,
@@ -353,7 +353,7 @@ namespace IdentityServer.IntegrationTests.Common
             string responseMode = null,
             string codeChallenge = null,
             string codeChallengeMethod = null,
-            object extra = null)
+            Parameters extra = null)
         {
             var old = BrowserClient.AllowAutoRedirect;
             BrowserClient.AllowAutoRedirect = false;
@@ -365,7 +365,7 @@ namespace IdentityServer.IntegrationTests.Common
             BrowserClient.AllowAutoRedirect = old;
 
             var redirect = result.Headers.Location.ToString();
-            if (redirect.StartsWith(IdentityServerPipeline.ErrorPage))
+            if (redirect.StartsWith(ErrorPage))
             {
                 // request error page in pipeline so we can get error info
                 await BrowserClient.GetAsync(redirect);

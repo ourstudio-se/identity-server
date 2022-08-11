@@ -57,7 +57,6 @@ IdentityServer4 is built using the following great open source projects and free
 * [ASP.NET Core](https://github.com/dotnet/aspnetcore)
 * [Bullseye](https://github.com/adamralph/bullseye)
 * [SimpleExec](https://github.com/adamralph/simple-exec)
-* [MinVer](https://github.com/adamralph/minver)
 * [Json.Net](http://www.newtonsoft.com/json)
 * [XUnit](https://xunit.github.io/)
 * [Fluent Assertions](http://www.fluentassertions.com/)

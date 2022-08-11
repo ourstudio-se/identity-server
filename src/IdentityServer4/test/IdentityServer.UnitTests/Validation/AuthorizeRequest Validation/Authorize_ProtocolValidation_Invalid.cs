@@ -19,13 +19,13 @@ namespace IdentityServer.UnitTests.Validation.AuthorizeRequest_Validation
 
         [Fact]
         [Trait("Category", Category)]
-        public void Null_Parameter()
+        public async Task Null_Parameter()
         {
             var validator = Factory.CreateAuthorizeRequestValidator();
 
             Func<Task> act = () => validator.ValidateAsync(null);
 
-            act.Should().Throw<ArgumentNullException>();
+            await act.Should().ThrowAsync<ArgumentNullException>();
         }
 
         [Fact]
@@ -376,7 +376,8 @@ namespace IdentityServer.UnitTests.Validation.AuthorizeRequest_Validation
             parameters.Add(OidcConstants.AuthorizeRequest.ClientId, "hybridclient");
             parameters.Add(OidcConstants.AuthorizeRequest.Scope, "openid");
             parameters.Add(OidcConstants.AuthorizeRequest.RedirectUri, "https://server/cb");
-            parameters.Add(OidcConstants.AuthorizeRequest.ResponseType, "id_token code token"); // Unconventional ordering
+            parameters.Add(OidcConstants.AuthorizeRequest.ResponseType,
+                "id_token code token"); // Unconventional ordering
             parameters.Add(OidcConstants.AuthorizeRequest.ResponseMode, OidcConstants.ResponseModes.Query);
 
             var validator = Factory.CreateAuthorizeRequestValidator();

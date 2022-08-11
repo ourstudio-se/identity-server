@@ -2,32 +2,31 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using Newtonsoft.Json;
 using System;
 using System.Security.Claims;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #pragma warning disable 1591
 
 namespace IdentityServer4.Stores.Serialization
 {
-    public class ClaimConverter : JsonConverter
+    public class ClaimConverter : JsonConverter<Claim>
     {
         public override bool CanConvert(Type objectType)
         {
             return typeof(Claim) == objectType;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override Claim Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var source = serializer.Deserialize<ClaimLite>(reader);
+            var source = JsonSerializer.Deserialize<ClaimLite>(reader.GetString());
             var target = new Claim(source.Type, source.Value, source.ValueType);
             return target;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, Claim source, JsonSerializerOptions options)
         {
-            var source = (Claim)value;
-
             var target = new ClaimLite
             {
                 Type = source.Type,
@@ -35,7 +34,7 @@ namespace IdentityServer4.Stores.Serialization
                 ValueType = source.ValueType
             };
 
-            serializer.Serialize(writer, target);
+            writer.WriteStringValue(JsonSerializer.Serialize(target, options));
         }
     }
 }

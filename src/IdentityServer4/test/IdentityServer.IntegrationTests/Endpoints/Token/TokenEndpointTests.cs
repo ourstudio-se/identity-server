@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Security.Claims;
+using System.Text.Json;
 using System.Threading.Tasks;
 using IdentityServer.IntegrationTests.Common;
 using Xunit;
@@ -87,9 +88,8 @@ namespace IdentityServer.IntegrationTests.Endpoints.Token
             var response = await _mockPipeline.BackChannelClient.PostAsync(IdentityServerPipeline.TokenEndpoint, form);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var json = await response.Content.ReadAsStringAsync();
-            var result = JObject.Parse(json);
-            result.ContainsKey("error").Should().BeFalse();
+            var json = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+            json.ContainsKey("error").Should().BeFalse();
         }
 
         [Fact]
@@ -110,9 +110,8 @@ namespace IdentityServer.IntegrationTests.Endpoints.Token
             var response = await _mockPipeline.BackChannelClient.PostAsync(IdentityServerPipeline.TokenEndpoint, form);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var json = await response.Content.ReadAsStringAsync();
-            var result = JObject.Parse(json);
-            result.ContainsKey("error").Should().BeFalse();
+            var json = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+            json.ContainsKey("error").Should().BeFalse();
         }
     }
 }

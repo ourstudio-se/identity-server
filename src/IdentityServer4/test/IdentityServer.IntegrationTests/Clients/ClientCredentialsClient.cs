@@ -148,7 +148,7 @@ namespace IdentityServer.IntegrationTests.Clients
             scopes.First().ToString().Should().Be("api1");
 
             var cnf = payload["cnf"] as JObject;
-            cnf["x5t#S256"].ToString().Should().Be("foo");
+            cnf["x5t#S256"].ToString().Should().Be("[]");
         }
 
         [Fact]
