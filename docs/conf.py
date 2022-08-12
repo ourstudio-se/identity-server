@@ -58,9 +58,9 @@ source_suffix = ['.rst']
 master_doc = 'index'
 
 # General information about the project.
-project = 'IdentityServer'
-copyright = '2020, Brock Allen & Dominick Baier'
-author = 'Brock Allen & Dominick Baier'
+project = 'Ourstudio.IdentityServer'
+copyright = '2020 Brock Allen & Dominick Baier, 2022 Björn Vikström'
+author = 'Brock Allen & Dominick Baier, Björn Vikström'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -111,6 +111,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 # show_authors = False
 
+extensions.append("sphinxjp.themes.basicstrap")
+html_theme = 'basicstrap'
+
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'default'
 highlight_language = 'csharp'
@@ -130,15 +133,6 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-
-# on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
-import os
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-    html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # otherwise, readthedocs.org uses their theme by default, so no need to specify it
 
@@ -254,7 +248,7 @@ html_static_path = ['_static']
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'IdentityServerdoc'
+htmlhelp_basename = 'OurstudioIdentityServerdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -280,8 +274,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'IdentityServer.tex', 'IdentityServer Documentation',
-     'Brock Allen, Dominick Baier', 'manual'),
+    (master_doc, 'Ourstudio.IdentityServer.tex', 'Ourstudio.IdentityServer Documentation',
+     'Brock Allen, Dominick Baier, Björn Vikström', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -322,7 +316,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'identityserver', 'IdentityServer Documentation',
+    (master_doc, 'identityserver', 'Ourstudio.IdentityServer Documentation',
      [author], 1)
 ]
 
@@ -337,8 +331,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'IdentityServer', 'IdentityServer Documentation',
-     author, 'IdentityServer', 'One line description of project.',
+    (master_doc, 'Ourstudio.IdentityServer', 'Ourstudio.IdentityServer Documentation',
+     author, 'Ourstudio.IdentityServer', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -1,0 +1,36 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: Publish NuGet Packages
+
+env:
+  source: https://nuget.pkg.github.com/ourstudio-se/index.json
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+
+    - name: Use .NET6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    
+    - name: Set up dependencies for tests
+      run: |
+        docker run --rm -d --name redis -p 6379:6379 redis:latest
+
+    - name: Build NuGet packages
+      run: |
+        ./build.sh
+    
+    - name: Publish NuGet
+      run: |
+        dotnet nuget push nuget/*.nupkg -s ${{ env.source }} -k ${{ github.token }}
+      
+    - name: Cleanup
+      run: |
+        docker stop redis

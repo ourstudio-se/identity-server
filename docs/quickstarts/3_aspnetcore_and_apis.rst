@@ -41,11 +41,12 @@ Modifying the MVC client
 ^^^^^^^^^^^^^^^^^^^^^^^^
 All that's left to do now in the client is to ask for the additional resources via the scope parameter. This is done in the OpenID Connect handler configuration::
 
-    services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = "Cookies";
-        options.DefaultChallengeScheme = "oidc";
-    })
+    builder.Services
+        .AddAuthentication(options =>
+        {
+            options.DefaultScheme = "Cookies";
+            options.DefaultChallengeScheme = "oidc";
+        })
         .AddCookie("Cookies")
         .AddOpenIdConnect("oidc", options =>
         {
