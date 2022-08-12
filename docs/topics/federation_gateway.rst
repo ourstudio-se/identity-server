@@ -16,14 +16,3 @@ This architecture has the following advantages
 * forcing every authentication (internal or external) through one single place gives you tremendous flexibility with regards to identity mapping, providing a stable identity to all your applications and dealing with new requirements
 
 In other words - owning your federation gateway gives you a lot of control over your identity infrastructure. And since the identity of your users is one of your most important assets, we recommend taking control over the gateway.
-
-Implementation
-^^^^^^^^^^^^^^
-Our `quick start UI <https://github.com/IdentityServer/IdentityServer4.Quickstart.UI>`_ utilizes some of the below features. Also check out the :ref:`external authentication quickstart <refExternalAuthenticationQuickstart>` and the 
-docs about :ref:`external providers <refExternalIdentityProviders>`.
-
-* You can add support for external identity providers by adding authentication handlers to your IdentityServer application.
-* You can programmatically query those external providers by calling ``IAuthenticationSchemeProvider``. This allows to dynamically render your login page based on the registered external providers.
-* Our client configuration model allows restricting the available providers on a per client basis (use the ``IdentityProviderRestrictions`` property).
-* You can also use the ``EnableLocalLogin`` property on the client to tell your UI whether the username/password input should be rendered.
-* Our quickstart UI funnels all external authentication calls through a single callback (see ``ExternalLoginCallback`` on the ``AccountController`` class). This allows for a single point for post-processing.
