@@ -57,11 +57,14 @@ namespace build
             Target(Targets.Pack, DependsOn(Targets.Build, Targets.CleanPackOutput), () =>
             {
                 var tag = Environment.GetEnvironmentVariable("GITHUB_REF_NAME");
-                var semver = tag.Replace("v", "");
+                var versionTag = tag?.Replace("v", "");
+                var semver = string.IsNullOrWhiteSpace(versionTag)
+                    ? string.Empty
+                    : $"-p:Version={versionTag} ";
 
                 var project = Directory.GetFiles("./src", "*.csproj", SearchOption.TopDirectoryOnly).OrderBy(_ => _).First();
 
-                Run("dotnet", $"pack {project} -c Release -p:Version={semver} -o \"{Directory.CreateDirectory(packOutput).FullName}\" --no-build --nologo", echoPrefix: Prefix);
+                Run("dotnet", $"pack {project} -c Release {semver}-o \"{Directory.CreateDirectory(packOutput).FullName}\" --no-build --nologo", echoPrefix: Prefix);
             });
 
             Target(Targets.SignPackage, DependsOn(Targets.Pack), () =>
