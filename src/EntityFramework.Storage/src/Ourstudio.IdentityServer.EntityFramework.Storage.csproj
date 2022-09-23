@@ -24,13 +24,16 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Ourstudio.IdentityServer.Storage" />
+    <PackageReference Include="Ourstudio.IdentityServer.Storage">
+        <NoWarn>NU1602</NoWarn>
+        <NoWarn>NU1604</NoWarn>
+    </PackageReference>
     
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.9" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 

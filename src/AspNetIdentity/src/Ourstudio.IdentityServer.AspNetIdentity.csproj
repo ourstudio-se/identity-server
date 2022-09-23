@@ -30,7 +30,10 @@
   </ItemGroup>
     
   <ItemGroup>
-    <PackageReference Include="Ourstudio.IdentityServer" />
+    <PackageReference Include="Ourstudio.IdentityServer">
+        <NoWarn>NU1602</NoWarn>
+        <NoWarn>NU1604</NoWarn>
+    </PackageReference>
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>

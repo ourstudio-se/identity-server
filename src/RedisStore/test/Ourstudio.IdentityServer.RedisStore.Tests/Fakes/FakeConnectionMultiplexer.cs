@@ -37,6 +37,7 @@ namespace Ourstudio.IdentityServer.RedisStore.Tests.Fakes
         public void Close(bool allowCommandsToComplete = true) { }
         public Task CloseAsync(bool allowCommandsToComplete = true) => Task.CompletedTask;
         public bool Configure(TextWriter log = null) => true;
+        public IServer[] GetServers() => new IServer[] { };
         public Task<bool> ConfigureAsync(TextWriter log = null) => Task.FromResult(true);
         public void Dispose() { }
         public void ExportConfiguration(Stream destination, ExportOptions options = (ExportOptions)(-1)) { }
@@ -60,5 +61,9 @@ namespace Ourstudio.IdentityServer.RedisStore.Tests.Fakes
         public void Wait(Task task) { }
         public T Wait<T>(Task<T> task) => default(T);
         public void WaitAll(params Task[] tasks) { }
+        public ValueTask DisposeAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

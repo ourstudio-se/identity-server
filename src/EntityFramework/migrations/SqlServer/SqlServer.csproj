@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ourstudio.IdentityServer.EntityFramework.csproj" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
   </ItemGroup>
 
 </Project>
