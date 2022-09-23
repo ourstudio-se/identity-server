@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-rm -rf nuget
-mkdir nuget
-
-dotnet tool restore
+if [ ! -d nuget ]; then
+    ./build.sh
+fi
 
 CMD="dotnet list package --vulnerable --include-transitive"
 EXPECT="following vulnerable packages"
