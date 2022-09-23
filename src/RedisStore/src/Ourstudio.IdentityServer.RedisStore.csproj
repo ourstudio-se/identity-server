@@ -27,9 +27,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ourstudio.IdentityServer" />
-    <PackageReference Include="Ourstudio.IdentityServer.Storage" />
-    <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
+    <PackageReference Include="Ourstudio.IdentityServer">
+        <NoWarn>NU1602</NoWarn>
+        <NoWarn>NU1604</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Ourstudio.IdentityServer.Storage">
+        <NoWarn>NU1602</NoWarn>
+        <NoWarn>NU1604</NoWarn>
+    </PackageReference>
+    <PackageReference Include="StackExchange.Redis" Version="2.6.66" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
