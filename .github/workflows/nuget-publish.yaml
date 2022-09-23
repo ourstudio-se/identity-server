@@ -19,10 +19,6 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     
-    - name: Run vulnerability scan
-      run: |
-        ./verify-deps.sh
-    
     - name: Set up dependencies for tests
       run: |
         docker run --rm -d --name redis -p 6379:6379 redis:latest
@@ -30,6 +26,10 @@ jobs:
     - name: Build NuGet packages
       run: |
         ./build.sh
+    
+    - name: Run vulnerability scan
+      run: |
+        ./verify-deps.sh
     
     - name: Publish NuGet
       run: |
