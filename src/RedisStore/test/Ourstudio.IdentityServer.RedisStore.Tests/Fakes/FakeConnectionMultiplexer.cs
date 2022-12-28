@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using StackExchange.Redis.Maintenance;
 
 namespace Ourstudio.IdentityServer.RedisStore.Tests.Fakes
 {
@@ -32,6 +33,7 @@ namespace Ourstudio.IdentityServer.RedisStore.Tests.Fakes
         public event EventHandler<ConnectionFailedEventArgs> ConnectionRestored;
         public event EventHandler<EndPointEventArgs> ConfigurationChanged;
         public event EventHandler<EndPointEventArgs> ConfigurationChangedBroadcast;
+        public event EventHandler<ServerMaintenanceEvent> ServerMaintenanceEvent;
         public event EventHandler<HashSlotMovedEventArgs> HashSlotMoved;
 
         public void Close(bool allowCommandsToComplete = true) { }
