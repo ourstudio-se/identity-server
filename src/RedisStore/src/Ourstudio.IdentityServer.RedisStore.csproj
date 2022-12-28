@@ -35,8 +35,10 @@
         <NoWarn>NU1602</NoWarn>
         <NoWarn>NU1604</NoWarn>
     </PackageReference>
-    <PackageReference Include="StackExchange.Redis" Version="2.6.66" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.86" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 </Project>
