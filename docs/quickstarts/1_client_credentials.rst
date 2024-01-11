@@ -34,7 +34,7 @@ Add package sources for NuGet to locate Ourstudio.IdentityServer by creating a `
 
 Defining the server
 ^^^^^^^^^^^^^^^^^^^
-Create an empty .NET6 web application, e.g.::
+Create an empty .NET8 web application, e.g.::
 
     dotnet new web -n Server -o src/Server/
     dotnet sln Quickstart.sln add src/Server/Server.csproj
