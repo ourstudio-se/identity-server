@@ -14,7 +14,7 @@ Ourstudio.IdentityServer was created to fill the void IdentityServer4 left when 
 
 ## The current state
 
-Ourstudio.IdentityServer v1 supports .NET6 and should be a drop-in replacement for the latest IdentityServer4 release.
+Ourstudio.IdentityServer v1 supports .NET8 and should be a drop-in replacement for the latest IdentityServer4 release.
 
 ## The future state
 

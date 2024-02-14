@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@main
 
-    - name: Use .NET6
+    - name: Use .NET8
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.x'
     
     - name: Set up dependencies for tests
       run: |
@@ -25,7 +25,7 @@ jobs:
 
     - name: Build NuGet packages
       run: |
-        ./build.sh
+        ./rebuild.sh
     
     - name: Run vulnerability scan
       run: |
