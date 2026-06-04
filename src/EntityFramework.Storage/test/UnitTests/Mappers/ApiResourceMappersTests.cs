@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Ourstudio.IdentityServer.EntityFramework.Mappers;
@@ -13,9 +14,25 @@ namespace Ourstudio.IdentityServer.EntityFramework.UnitTests.Mappers
     public class ApiResourceMappersTests
     {
         [Fact]
-        public void AutomapperConfigurationIsValid()
+        public void All_properties_roundtrip()
         {
-            ApiResourceMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            var model = new ApiResource
+            {
+                Enabled = false,
+                Name = "name",
+                DisplayName = "display_name",
+                Description = "description",
+                ShowInDiscoveryDocument = false,
+                AllowedAccessTokenSigningAlgorithms = { "RS256", "ES256" },
+                ApiSecrets = { new Models.Secret("secret_value", "secret_desc", new DateTime(2030, 1, 1)) { Type = "custom_type" } },
+                Scopes = { "scope1", "scope2" },
+                UserClaims = { "claim1", "claim2" },
+                Properties = { { "key", "value" } }
+            };
+
+            var mappedModel = model.ToEntity().ToModel();
+
+            mappedModel.Should().BeEquivalentTo(model);
         }
 
         [Fact]
