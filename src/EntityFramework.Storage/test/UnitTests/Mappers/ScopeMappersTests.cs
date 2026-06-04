@@ -13,9 +13,24 @@ namespace Ourstudio.IdentityServer.EntityFramework.UnitTests.Mappers
     public class ScopesMappersTests
     {
         [Fact]
-        public void ScopeAutomapperConfigurationIsValid()
+        public void All_properties_roundtrip()
         {
-            ScopeMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            var model = new ApiScope
+            {
+                Enabled = false,
+                Name = "name",
+                DisplayName = "display_name",
+                Description = "description",
+                Required = true,
+                Emphasize = true,
+                ShowInDiscoveryDocument = false,
+                UserClaims = { "c1", "c2" },
+                Properties = { { "key", "value" } }
+            };
+
+            var mappedModel = model.ToEntity().ToModel();
+
+            mappedModel.Should().BeEquivalentTo(model);
         }
 
         [Fact]

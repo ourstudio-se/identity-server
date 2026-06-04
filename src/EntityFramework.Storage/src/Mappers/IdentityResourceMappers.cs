@@ -1,8 +1,9 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
 using Ourstudio.IdentityServer.EntityFramework.Entities;
 
 namespace Ourstudio.IdentityServer.EntityFramework.Mappers
@@ -12,14 +13,6 @@ namespace Ourstudio.IdentityServer.EntityFramework.Mappers
     /// </summary>
     public static class IdentityResourceMappers
     {
-        static IdentityResourceMappers()
-        {
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<IdentityResourceMapperProfile>())
-                .CreateMapper();
-        }
-
-        internal static IMapper Mapper { get; }
-
         /// <summary>
         /// Maps an entity to a model.
         /// </summary>
@@ -27,7 +20,22 @@ namespace Ourstudio.IdentityServer.EntityFramework.Mappers
         /// <returns></returns>
         public static Models.IdentityResource ToModel(this IdentityResource entity)
         {
-            return entity == null ? null : Mapper.Map<Models.IdentityResource>(entity);
+            if (entity == null) return null;
+
+            return new Models.IdentityResource
+            {
+                Enabled = entity.Enabled,
+                Name = entity.Name,
+                DisplayName = entity.DisplayName,
+                Description = entity.Description,
+                Required = entity.Required,
+                Emphasize = entity.Emphasize,
+                ShowInDiscoveryDocument = entity.ShowInDiscoveryDocument,
+                UserClaims = entity.UserClaims?.Select(x => x.Type).ToList() ?? new List<string>(),
+                Properties = entity.Properties == null
+                    ? new Dictionary<string, string>()
+                    : entity.Properties.ToDictionary(x => x.Key, x => x.Value)
+            };
         }
 
         /// <summary>
@@ -37,7 +45,20 @@ namespace Ourstudio.IdentityServer.EntityFramework.Mappers
         /// <returns></returns>
         public static IdentityResource ToEntity(this Models.IdentityResource model)
         {
-            return model == null ? null : Mapper.Map<IdentityResource>(model);
+            if (model == null) return null;
+
+            return new IdentityResource
+            {
+                Enabled = model.Enabled,
+                Name = model.Name,
+                DisplayName = model.DisplayName,
+                Description = model.Description,
+                Required = model.Required,
+                Emphasize = model.Emphasize,
+                ShowInDiscoveryDocument = model.ShowInDiscoveryDocument,
+                UserClaims = model.UserClaims?.Select(x => new IdentityResourceClaim { Type = x }).ToList(),
+                Properties = model.Properties?.Select(x => new IdentityResourceProperty { Key = x.Key, Value = x.Value }).ToList()
+            };
         }
     }
 }
