@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.27" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
     
     <PackageReference Include="xunit" Version="2.6.5" />
