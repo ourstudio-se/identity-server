@@ -1,9 +1,9 @@
 <Project>
 
   <PropertyGroup>
-    <FrameworkVersion>8.0.0</FrameworkVersion>
-    <ExtensionsVersion>8.0.0</ExtensionsVersion>
-    <EntityFrameworkVersion>8.0.0</EntityFrameworkVersion>
+    <FrameworkVersion>10.0.0</FrameworkVersion>
+    <ExtensionsVersion>10.0.0</ExtensionsVersion>
+    <EntityFrameworkVersion>10.0.0</EntityFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>

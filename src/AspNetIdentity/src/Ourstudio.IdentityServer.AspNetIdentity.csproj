@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Ourstudio.IdentityServer.AspNetIdentity</PackageId>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     
     <Description>ASP.NET Core Identity Integration for IdentityServer</Description>
     <Authors>Brock Allen;Dominick Baier</Authors>
@@ -35,7 +35,7 @@
         <NoWarn>NU1604</NoWarn>
     </PackageReference>
     
-    <PackageReference Include="IdentityModel" Version="6.2.0" />
+    <PackageReference Include="IdentityModel" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

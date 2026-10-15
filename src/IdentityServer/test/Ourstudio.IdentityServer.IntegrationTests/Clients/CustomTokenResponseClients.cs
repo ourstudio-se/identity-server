@@ -280,7 +280,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Clients
 
         private Dictionary<string, object> GetFields(TokenResponse response)
         {
-            return JsonConvert.DeserializeObject<Dictionary<string, object>>(response.Json.GetRawText());
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(response.Json.Value.GetRawText());
         }
 
         private Dictionary<string, object> GetPayload(TokenResponse response)

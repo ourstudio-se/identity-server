@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Ourstudio.IdentityServer.EntityFramework.Storage</PackageId>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     
     <Description>EntityFramework persistence layer for IdentityServer</Description>
     <Authors>Brock Allen;Dominick Baier;Scott Brady</Authors>
@@ -29,9 +29,9 @@
         <NoWarn>NU1604</NoWarn>
     </PackageReference>
     
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.13" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.13" />
   </ItemGroup>
 
 </Project>

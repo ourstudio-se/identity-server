@@ -182,7 +182,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = introspectionResponse.Json.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
+            var values = introspectionResponse.Json.Value.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
 
             values["aud"].ValueKind.Should().Be(JsonValueKind.String);
             values["iss"].ValueKind.Should().Be(JsonValueKind.String);
@@ -221,7 +221,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = introspectionResponse.Json.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
+            var values = introspectionResponse.Json.Value.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
 
             values["aud"].ValueKind.Should().Be(JsonValueKind.String);
             values["iss"].ValueKind.Should().Be(JsonValueKind.String);
@@ -260,7 +260,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = introspectionResponse.Json.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
+            var values = introspectionResponse.Json.Value.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
 
             values["aud"].ValueKind.Should().Be(JsonValueKind.Array);
 
@@ -304,7 +304,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = introspectionResponse.Json.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
+            var values = introspectionResponse.Json.Value.Deserialize(typeof(Dictionary<string, JsonElement>)) as Dictionary<string, JsonElement>;
 
             values["aud"].ValueKind.Should().Be(JsonValueKind.String);
             values["iss"].ValueKind.Should().Be(JsonValueKind.String);
