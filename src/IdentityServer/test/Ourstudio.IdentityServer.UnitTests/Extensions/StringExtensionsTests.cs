@@ -87,5 +87,24 @@ namespace Ourstudio.IdentityServer.UnitTests.Extensions
             CheckOrigin("test://localhost:8080/test", null);
             CheckOrigin("test://localhost:8080/test/resource", null);
         }
+
+        [Theory]
+        [InlineData("/", true)]
+        [InlineData("/connect/authorize/callback?client_id=x", true)]
+        [InlineData("~/", true)]
+        [InlineData("~/foo", true)]
+        [InlineData("//evil.com", false)]
+        [InlineData("/\\evil.com", false)]
+        [InlineData("~//evil.com", false)]
+        [InlineData("https://evil.com", false)]
+        [InlineData("/\t/evil.com", false)]
+        [InlineData("/\tevil.com", false)]
+        [InlineData("/\r\n//evil.com", false)]
+        [InlineData("~/\t/evil.com", false)]
+        [InlineData("/\t/evil.com/connect/authorize", false)]
+        public void IsLocalUrl_should_reject_external_and_control_character_urls(string url, bool expected)
+        {
+            Assert.Equal(expected, url.IsLocalUrl());
+        }
     }
 }

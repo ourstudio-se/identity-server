@@ -33,6 +33,5 @@
         <NoWarn>NU1604</NoWarn>
     </PackageReference>
     
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

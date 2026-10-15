@@ -374,6 +374,17 @@ namespace Ourstudio.IdentityServer.Validation
             }
 
             /////////////////////////////////////////////
+            // a public client is never authenticated, so client credentials would
+            // hand out tokens to anyone who knows the client id
+            /////////////////////////////////////////////
+            if (!_validatedRequest.Client.RequireClientSecret)
+            {
+                LogError("Public client (RequireClientSecret = false) cannot use the client credentials flow",
+                    new { clientId = _validatedRequest.Client.ClientId });
+                return Invalid(OidcConstants.TokenErrors.UnauthorizedClient);
+            }
+
+            /////////////////////////////////////////////
             // check if client is allowed to request scopes
             /////////////////////////////////////////////
             if (!await ValidateRequestedScopesAsync(parameters, ignoreImplicitIdentityScopes: true,
