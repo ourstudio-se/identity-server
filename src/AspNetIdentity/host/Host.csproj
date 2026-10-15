@@ -9,9 +9,9 @@
     <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    <!-- Pin transitive System.Text.Json to a patched version (GHSA-hh2w-p6rv-4g7w, GHSA-8g4q-xg66-9fp4);
-         Serilog floors it at the vulnerable 8.0.0. -->
-    <PackageReference Include="System.Text.Json" Version="8.0.6" />
+    <!-- Pin transitive System.Security.Cryptography.Pkcs to a patched version (GHSA-846f-f764-76mx);
+         Microsoft.Data.SqlClient floors it at the vulnerable 9.0.11. -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
   </ItemGroup>
 
   <ItemGroup>

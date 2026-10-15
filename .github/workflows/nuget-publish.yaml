@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
 
-    - name: Use .NET8
+    - name: Use .NET 10
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '10.0.x'
