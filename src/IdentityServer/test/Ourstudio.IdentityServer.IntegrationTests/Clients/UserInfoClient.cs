@@ -198,7 +198,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Clients
                 Token = response.AccessToken
             });
 
-            roles = userInfo.Json.TryGetStringArray("role").ToArray();
+            roles = userInfo.Json.Value.TryGetStringArray("role").ToArray();
             roles.Length.Should().Be(2);
             roles.Should().Contain("Geek");
             roles.Should().Contain("Developer");
