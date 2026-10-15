@@ -1,4 +1,4 @@
-// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
@@ -270,7 +270,7 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Clients
 
 
         [Fact]
-        public async Task Request_For_client_with_no_secret_and_basic_authentication_should_succeed()
+        public async Task Request_For_client_with_no_secret_should_fail()
         {
             var response = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
@@ -279,21 +279,8 @@ namespace Ourstudio.IdentityServer.IntegrationTests.Clients
                 Scope = "api1"
             });
 
-            response.IsError.Should().Be(false);
-            response.ExpiresIn.Should().Be(3600);
-            response.TokenType.Should().Be("Bearer");
-            response.IdentityToken.Should().BeNull();
-            response.RefreshToken.Should().BeNull();
-
-            var payload = GetPayload(response);
-            
-            payload.Should().Contain("iss", "https://idsvr4");
-            payload.Should().Contain("client_id", "client.no_secret");
-
-            payload["aud"].Should().Be("api");
-
-            var scopes = payload["scope"] as JArray;
-            scopes.First().ToString().Should().Be("api1");
+            response.IsError.Should().Be(true);
+            response.Error.Should().Be("unauthorized_client");
         }
 
         [Fact]

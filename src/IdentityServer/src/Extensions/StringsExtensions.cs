@@ -163,7 +163,7 @@ namespace Ourstudio.IdentityServer.Extensions
                 // url doesn't start with "//" or "/\"
                 if (url[1] != '/' && url[1] != '\\')
                 {
-                    return true;
+                    return !HasControlCharacter(url, 1);
                 }
 
                 return false;
@@ -181,10 +181,26 @@ namespace Ourstudio.IdentityServer.Extensions
                 // url doesn't start with "~//" or "~/\"
                 if (url[2] != '/' && url[2] != '\\')
                 {
-                    return true;
+                    return !HasControlCharacter(url, 2);
                 }
 
                 return false;
+            }
+
+            return false;
+        }
+
+        // Browsers strip control characters such as tab and newline, so "/\t/evil.com"
+        // is followed as "//evil.com" (CVE-2024-39694). Mirrors ASP.NET Core's
+        // UrlHelperBase.CheckIsLocalUrl.
+        private static bool HasControlCharacter(string url, int startIndex)
+        {
+            for (var i = startIndex; i < url.Length; i++)
+            {
+                if (char.IsControl(url[i]))
+                {
+                    return true;
+                }
             }
 
             return false;
